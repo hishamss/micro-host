@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from 'react';
-
+import Home from './Home'
+import Header from './common/header'
+import Footer from './common/footer'
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+} from "react-router-dom";
 // const RemoteButton = React.lazy(() => import('app2/Button'));
 const loadScope = (url, scope) => {
   const element = document.createElement('script');
@@ -35,13 +42,22 @@ const RemoteButton = React.lazy(() => loadModule(
 ))
 
 const App = () => (
-    <div>
-      <h1>Basic Host-Remote</h1>
-      <h2>App 1</h2>
-      <React.Suspense fallback={<p>RemoteButton is not available</p>}>
+  <BrowserRouter>
+  <div>
+    <Header/>
+    <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/reports" element={ <React.Suspense fallback={<p>RemoteButton is not available</p>}>
         <RemoteButton />
-      </React.Suspense>
+      </React.Suspense>} />
+        <Route path="/*" element={<Home />} />
+      </Routes>
+
+      <Footer />
+     
     </div>
+    </BrowserRouter>
+    
   );
 
 export default App;

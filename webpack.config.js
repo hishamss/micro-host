@@ -14,6 +14,9 @@ module.exports = {
   output: {
     publicPath: 'auto',
   },
+  resolve: {
+    extensions: [".tsx", ".ts", ".jsx", ".js", ".json"],
+  },
   module: {
     rules: [
       {
@@ -24,6 +27,10 @@ module.exports = {
           presets: ['@babel/preset-react'],
         },
       },
+      {
+        test: /\.(css|s[ac]ss)$/i,
+        use: ["style-loader", "css-loader", "postcss-loader"],
+      }
     ],
   },
   //http://localhost:3002/remoteEntry.js
