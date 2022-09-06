@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import Home from './Home'
-import Header from './common/header'
+import GlobalHeader from './common/header'
 import Footer from './common/footer'
 import {
   BrowserRouter,
   Routes,
   Route,
 } from "react-router-dom";
+import { Toolkit} from "@uitk/react";
+import "@uitk/themes/optum/fonts.css";
+import styled from "styled-components";
 // const RemoteButton = React.lazy(() => import('app2/Button'));
 const loadScope = (url, scope) => {
   const element = document.createElement('script');
@@ -30,7 +33,7 @@ const loadModule = async (url, scope, module) => {
     const factory = await container.get(module)
     return factory()
   } catch (error) {
-    console.error('Error loading module:', error)
+    //console.error('Error loading module:', error)
     // throw error
   }
 }
@@ -38,13 +41,14 @@ const loadModule = async (url, scope, module) => {
 const RemoteButton = React.lazy(() => loadModule(
   'http://localhost:3002/remoteEntry.js',
   'app2',
-  './Button'
+  './ReportsHome'
 ))
 
 const App = () => (
+  <Toolkit appId="@uitk/react-starter-kit">
   <BrowserRouter>
   <div>
-    <Header/>
+    <GlobalHeader/>
     <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/reports" element={ <React.Suspense fallback={<p>RemoteButton is not available</p>}>
@@ -57,7 +61,7 @@ const App = () => (
      
     </div>
     </BrowserRouter>
-    
+    </Toolkit>
   );
 
 export default App;
