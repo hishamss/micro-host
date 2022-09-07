@@ -44,6 +44,12 @@ const ReportsTable = React.lazy(() => loadModule(
   './ReportsTable'
 ))
 
+const MappingTable = React.lazy(() => loadModule(
+  'http://localhost:3003/remoteEntry.js',
+  'app3',
+  './MappingTable'
+))
+
 const App = () => (
   <Toolkit appId="@uitk/react-starter-kit">
   <BrowserRouter>
@@ -53,6 +59,9 @@ const App = () => (
         <Route path="/" element={<HomeTable />} />
         <Route path="/reports" element={ <React.Suspense fallback={<p>Reports table is not available</p>}>
         <ReportsTable />
+      </React.Suspense>} />
+      <Route path="/mapping" element={ <React.Suspense fallback={<p>Mapping table is not available</p>}>
+        <MappingTable />
       </React.Suspense>} />
         <Route path="/*" element={<HomeTable />} />
       </Routes>

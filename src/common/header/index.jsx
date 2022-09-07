@@ -54,7 +54,16 @@ const CurrentRoute = styled.span`
           }
         ],
       },
-      { label: "Mapping", url: "/" },
+      { 
+        label: "Mapping", 
+        links: [
+          {
+            label: "Mapping page",
+            url: "/mapping",
+          }
+        ],
+      
+    },
     ],
   };
 const GlobalHeader = () => {
