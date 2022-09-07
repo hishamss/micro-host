@@ -1,4 +1,11 @@
 .common-footer {
+    display: flex;
+    justify-content: center;
     background-color: #f4f0ed;
-    color: #032678
+    color: #032678;
+    position: fixed;
+    left:0;
+    bottom: 0;
+    right:0
+
 }

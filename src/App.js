@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import Home from './Home'
+import React from 'react';
+import HomeTable from './table'
 import GlobalHeader from './common/header'
 import Footer from './common/footer'
 import {
@@ -38,10 +38,10 @@ const loadModule = async (url, scope, module) => {
   }
 }
 
-const RemoteButton = React.lazy(() => loadModule(
+const ReportsTable = React.lazy(() => loadModule(
   'http://localhost:3002/remoteEntry.js',
   'app2',
-  './ReportsHome'
+  './ReportsTable'
 ))
 
 const App = () => (
@@ -50,11 +50,11 @@ const App = () => (
   <div>
     <GlobalHeader/>
     <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/reports" element={ <React.Suspense fallback={<p>RemoteButton is not available</p>}>
-        <RemoteButton />
+        <Route path="/" element={<HomeTable />} />
+        <Route path="/reports" element={ <React.Suspense fallback={<p>Reports table is not available</p>}>
+        <ReportsTable />
       </React.Suspense>} />
-        <Route path="/*" element={<Home />} />
+        <Route path="/*" element={<HomeTable />} />
       </Routes>
 
       <Footer />

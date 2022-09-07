@@ -60,16 +60,15 @@ const CurrentRoute = styled.span`
 const GlobalHeader = () => {
 
     return (
-        // <div className="common-header">
-        //     <Link to="/">Home</Link>
-        //     <Link to="reports">Reports</Link>
-        // </div>
         <>
     <Header
       globalNavigation={globalNavigationConfig}
       useLocation={useCurrentRoute}
       skipLink={{ id: "main" }}
     />
+    <div className="common-header">
+            <h1>Common Header</h1>
+        </div>
     </>
     );
 

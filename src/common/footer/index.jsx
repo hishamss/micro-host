@@ -4,7 +4,7 @@ import "./index.css";
 const Footer = () => {
     return (
         <div className="common-footer">
-            Footer
+            <h1>Common Footer</h1>
         </div>
     );
 
