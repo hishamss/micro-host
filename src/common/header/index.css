@@ -1,6 +1,5 @@
 .common-header {
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     background-color: #f4f0ed;
-    color: #032678
 }
