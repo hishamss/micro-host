@@ -1,4 +1,6 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
+import { loginAPI } from "../../services/login";
+import { useNavigate } from "react-router-dom";
 import "./index.css";
 import {
     Link, useLocation
@@ -7,11 +9,21 @@ import {
     anchorProperties,
     Button,
     Header,
-    getNativeProps,
-    LinkProps,
+    getNativeProps
   } from "@uitk/react";
   import styled from "styled-components";
 
+  import Logo from '../../Logos/Optum_logo_header.svg';
+
+  // ${props => props.theme.color.background.base.value};
+  const StoryWrapper = styled.div`
+  background-color: #f4f0ed;
+  padding: 10px 20px 20px 20px;
+  .uitk-button {
+    margin-right: 15px;
+    margin-top: 10px;
+  }
+`;
 const CurrentRouteWrapper = styled.div`
   padding: 12px 0;
 `;
@@ -40,9 +52,30 @@ const CurrentRoute = styled.span`
     linkAs: RoutableLink,
     links: [
       {
-        label: "Home",
+        label: "CMS",
         links: [
-          { label: "Home page", url: "/" },
+          {
+            label: "CMS page",
+            url: "/",
+          }
+        ],
+      },
+      {
+        label: "State",
+        links: [
+          {
+            label: "State page",
+            url: "/state",
+          }
+        ],
+      },
+      {
+        label: "Operations",
+        links: [
+          {
+            label: "Operations page",
+            url: "/operations",
+          }
         ],
       },
       {
@@ -66,17 +99,52 @@ const CurrentRoute = styled.span`
     },
     ],
   };
-const GlobalHeader = () => {
 
+const logo = <img src={Logo} className="uitk-header__logo" alt="logo" />;
+const prodName = 'Nemis Portal'
+const GlobalHeader = () => {
+  let navigate = useNavigate();
+  useEffect(() => {
+    let jwt = localStorage.getItem("JWT");
+    if(jwt) setIsLoggedin(true);
+    if(!jwt) setIsLoggedin(false);
+  }, [])
+const [isLoggedin, setIsLoggedin] = useState(false);
+const login = () => {
+  loginAPI().then(result => {
+    localStorage.setItem("JWT", result)
+    setIsLoggedin(true);
+  })
+  
+}
+const logout = () => {
+  localStorage.removeItem("JWT");
+  setIsLoggedin(false);
+  return navigate("/");
+}
     return (
         <>
     <Header
+      logoContent={logo}
+      productName={prodName}
       globalNavigation={globalNavigationConfig}
       useLocation={useCurrentRoute}
       skipLink={{ id: "main" }}
     />
     <div className="common-header">
-            <h1>Common Header</h1>
+            <div>
+            <StoryWrapper>
+    {!isLoggedin && <Button onPress={login} size="s">
+      Login
+    </Button> }
+    {isLoggedin && 
+    <Button onPress={logout} size="s">
+    Logout
+  </Button>
+    }
+    
+    </StoryWrapper>
+            </div>
         </div>
     </>
     );

@@ -1,7 +1,7 @@
 import React from 'react';
 import HomeTable from './table'
 import GlobalHeader from './common/header'
-import Footer from './common/footer'
+// import Footer from './common/footer'
 import {
   BrowserRouter,
   Routes,
@@ -9,8 +9,9 @@ import {
 } from "react-router-dom";
 import { Toolkit} from "@uitk/react";
 import "@uitk/themes/optum/fonts.css";
-import styled from "styled-components";
-// const RemoteButton = React.lazy(() => import('app2/Button'));
+
+
+
 const loadScope = (url, scope) => {
   const element = document.createElement('script');
   const promise = new Promise((resolve, reject) => {
@@ -50,7 +51,8 @@ const MappingTable = React.lazy(() => loadModule(
   './MappingTable'
 ))
 
-const App = () => (
+const App = () => {
+return (
   <Toolkit appId="@uitk/react-starter-kit">
   <BrowserRouter>
   <div>
@@ -66,11 +68,12 @@ const App = () => (
         <Route path="/*" element={<HomeTable />} />
       </Routes>
 
-      <Footer />
+      {/* <Footer /> */}
      
     </div>
     </BrowserRouter>
     </Toolkit>
   );
+}
 
 export default App;

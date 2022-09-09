@@ -30,7 +30,17 @@ module.exports = {
       {
         test: /\.(css|s[ac]ss)$/i,
         use: ["style-loader", "css-loader", "postcss-loader"],
-      }
+      },
+      {
+        test: /\.svg/,
+        use: {
+          loader: "svg-url-loader",
+          options: {
+            // make all svg images to work in IE
+            iesafe: true,
+          },
+        },
+      },
     ],
   },
   plugins: [
