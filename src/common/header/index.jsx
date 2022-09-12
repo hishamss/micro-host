@@ -16,13 +16,24 @@ import {
   import Logo from '../../Logos/Optum_logo_header.svg';
 
   // ${props => props.theme.color.background.base.value};
-  const StoryWrapper = styled.div`
-  background-color: #f4f0ed;
+//   const StoryWrapper = styled.div`
+//   background-color: #f4f0ed;
+//   padding: 10px 20px 20px 20px;
+//   .uitk-button {
+//     margin-right: 15px;
+//     margin-top: 10px;
+//   }
+// `;
+
+const StoryWrapper = styled.div`
+  background-color: ${props => props.theme.color.text.base.value};
   padding: 10px 20px 20px 20px;
   .uitk-button {
     margin-right: 15px;
     margin-top: 10px;
-  }
+  };
+  display:flex;
+  justify-content: flex-end
 `;
 const CurrentRouteWrapper = styled.div`
   padding: 12px 0;
@@ -109,6 +120,7 @@ const login = () => {
   loginAPI().then(result => {
     localStorage.setItem("JWT", result)
     setIsLoggedin(true);
+    return navigate("/");
   })
   
 }
@@ -119,6 +131,21 @@ const logout = () => {
 }
     return (
         <>
+        {/* <div className="common-header"> */}
+            {/* <div> */}
+            <StoryWrapper>
+    {!isLoggedin && <Button variant="ghost-inverse" onPress={login} size="s">
+      Login
+    </Button> }
+    {isLoggedin && 
+    <Button variant="ghost-inverse" onPress={logout} size="s">
+    Logout
+  </Button>
+    }
+    
+    </StoryWrapper>
+            {/* </div> */}
+        {/* </div> */}
     <Header
       logoContent={logo}
       productName={prodName}
@@ -126,21 +153,7 @@ const logout = () => {
       useLocation={useCurrentRoute}
       skipLink={{ id: "main" }}
     />
-    {/* <div className="common-header">
-            <div>
-            <StoryWrapper>
-    {!isLoggedin && <Button onPress={login} size="s">
-      Login
-    </Button> }
-    {isLoggedin && 
-    <Button onPress={logout} size="s">
-    Logout
-  </Button>
-    }
     
-    </StoryWrapper>
-            </div>
-        </div> */}
     </>
     );
 
