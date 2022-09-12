@@ -49,6 +49,7 @@ module.exports = {
       remotes: {
         app2: `app2@http://localhost:3002/remoteEntry.js`,
         app3: `app3@http://localhost:3003/remoteEntry.js`,
+        corrections: `corrections@http://localhost:3004/remoteEntry.js`,
       },
       shared: { 
         ...deps,

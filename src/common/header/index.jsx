@@ -52,20 +52,15 @@ const CurrentRoute = styled.span`
     linkAs: RoutableLink,
     links: [
       {
-        label: "CMS",
+        label: "Corrections",
         links: [
           {
-            label: "CMS page",
-            url: "/",
-          }
-        ],
-      },
-      {
-        label: "State",
-        links: [
+            label: "CMS",
+            url: "/cms/x12enc-search",
+          },
           {
-            label: "State page",
-            url: "/state",
+            label: "State",
+            url: "/state/search",
           }
         ],
       },
@@ -131,7 +126,7 @@ const logout = () => {
       useLocation={useCurrentRoute}
       skipLink={{ id: "main" }}
     />
-    <div className="common-header">
+    {/* <div className="common-header">
             <div>
             <StoryWrapper>
     {!isLoggedin && <Button onPress={login} size="s">
@@ -145,7 +140,7 @@ const logout = () => {
     
     </StoryWrapper>
             </div>
-        </div>
+        </div> */}
     </>
     );
 
