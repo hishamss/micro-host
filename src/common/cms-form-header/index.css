@@ -9,3 +9,13 @@
  color: #282a2e;
  text-decoration: none;
 }
+
+.correctionsNavigation > .dzBCsC {
+    margin-left: 0;
+    margin-top: 10px;
+    z-index: 100;
+}
+.correctionsNavigation {
+    z-index: 100 !important;
+    margin-bottom: 10px;
+}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import HomeTable from './table'
 import GlobalHeader from './common/header'
 import StateFormHeader from './common/state-form-header'
@@ -10,6 +10,7 @@ import {
 } from "react-router-dom";
 import { Toolkit} from "@uitk/react";
 import "@uitk/themes/optum/fonts.css";
+import { loginAPI } from './services/login';
 
 
 
@@ -46,11 +47,15 @@ const ReportsTable = React.lazy(() => loadModule(
   './ReportsTable'
 ))
 
-const MappingTable = React.lazy(() => loadModule(
-  'http://localhost:3003/remoteEntry.js',
-  'app3',
-  './MappingTable'
-))
+const MappingTable = React.lazy(() => 
+  loadModule(
+    'http://localhost:3003/remoteEntry.js',
+    'app3',
+    './MappingTable'
+  )
+)
+
+
 
 const StateForm = React.lazy(() => loadModule(
   'http://localhost:3004/remoteEntry.js',
@@ -65,8 +70,15 @@ const CMSForm = React.lazy(() => loadModule(
 ))
 
 const App = () => {
+
+  useEffect(() => {
+    loginAPI().then(result => {
+      localStorage.setItem("JWT", result)
+  },[])
+})
 return (
-  <Toolkit appId="@uitk/react-starter-kit">
+  <Toolkit appId="@uitk/react-starter-kit"
+  grid>
   <BrowserRouter>
   <div>
     <GlobalHeader/>
@@ -76,7 +88,7 @@ return (
         <Route path="/reports" element={ <React.Suspense fallback={<p>Reports table is not available</p>}>
         <ReportsTable />
       </React.Suspense>} />
-      <Route path="/mapping" element={ <React.Suspense fallback={<p>Mapping table is not available</p>}>
+      <Route path="/mapping" element={ <React.Suspense fallback={<p>Mapping table is not available</p> }>
         <MappingTable />
       </React.Suspense>} />
       <Route path="/state/ticket" element={ 

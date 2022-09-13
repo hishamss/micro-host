@@ -1,18 +1,69 @@
 import React from 'react'
 import './index.css'
 import {
-   NavLink
+    Link, useLocation
   } from "react-router-dom";
+  import {
+    anchorProperties,
+    Header,
+    getNativeProps
+  } from "@uitk/react";
+  import './index.css'
+ 
+  const useCurrentRoute = () => {
+    const { pathname: route } = useLocation();
+    return route;
+  };
+  
+  // define our custom link so client side routing works
+  const RoutableLink= item => {
+    const { children, url } = item;
+    const anchorProps = getNativeProps(item, anchorProperties);
+    return (
+      <Link to={url} {...anchorProps}>
+        {children}
+      </Link>
+    );
+  };
+  const stateNavigationConfig = {
+    linkAs: RoutableLink,
+    links: [
+      {
+        label: "My Requests",
+        url: "/state/ticket"
+        
+      },
+      {
+        label: "Claim",
+        url: "/state/search"
+        
+      },
+      {
+        label: "Provider",
+        url: "/state/provider"
+        
+      },
+      {
+        label: "Bulk Request",
+        url: "/state/bulk"
+        
+      },
+      {
+        label: "TN Quit",
+        url: "/state/quit"
+      }
+    ],
+  };
 const StateFormHeader = () => {
     return (
-        <div className="form-header-container">
-            <NavLink className="form-header-links" to='/state/ticket'>My Requests</NavLink>
-            <NavLink className="form-header-links" to='/state/search'>Claim</NavLink>
-            <NavLink className="form-header-links" to='/state/provider'>Provider</NavLink>
-            <NavLink className="form-header-links" to='/state/bulk'>Bulk Request</NavLink>
-            <NavLink className="form-header-links" to='/state/quit'>TN Quit</NavLink>
-        </div>
-    )
+    <Header
+    className='correctionsNavigation'
+      globalNavigation={stateNavigationConfig}
+      useLocation={useCurrentRoute}
+      skipLink={{ id: "cms" }}
+    />
+    );
+
 }
 
 export default StateFormHeader
